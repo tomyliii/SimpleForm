@@ -1,17 +1,17 @@
-div {
+main > div {
   width: 300px;
   margin: auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   font-family: sans-serif;
   font-size: 1em;
 }
-div > p:last-of-type {
+main > div > p:last-of-type {
   margin-bottom: 20px;
 }
 
-div > button {
+main > div > button {
   width: 100%;
   font-size: 1em;
   padding: 15px 10px;

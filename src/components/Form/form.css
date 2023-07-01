@@ -41,3 +41,22 @@ input {
 .error {
   border-color: red;
 }
+
+.info-password {
+  width: 100%;
+  text-align: justify;
+  align-self: left;
+  font-size: 0.8em;
+  margin-bottom: 20px;
+  color: rgb(105, 105, 105);
+}
+
+.red {
+  color: red;
+  white-space: pre;
+  padding-left: 25%;
+}
+
+.green {
+  color: green;
+}

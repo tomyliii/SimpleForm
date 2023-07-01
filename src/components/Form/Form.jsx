@@ -21,6 +21,10 @@ const Form = ({
   setMessageError,
   formIsDisplay,
   setFormIsDisplay,
+  infoPassword,
+  setInfoPassword,
+  infoPasswordClass,
+  setInfoPasswordClass,
 }) => {
   const regexMail = new RegExp("[a-zA-Z0-9]+@[a-zA-Z]+\\.[a-zA-Z]{2,3}");
   const regexpPasswordMaj = new RegExp("[A-Z]");
@@ -87,6 +91,34 @@ const Form = ({
     set(value);
   };
 
+  const checkPassword = (event) => {
+    const value = event.target.value;
+    let missingConditions = "";
+    if (!regexpPasswordMaj.test(value)) {
+      missingConditions += "\r\n-une majuscule";
+    }
+    if (!regexpPasswordMin.test(value)) {
+      missingConditions += "\r\n-une minuscule";
+    }
+    if (!regexpPasswordNoAlpha.test(value)) {
+      missingConditions += "\r\n-un caractére special";
+    }
+    if (!regexpPasswordNum.test(value)) {
+      missingConditions += "\r\n-un nombre";
+    }
+    if (value.length < 8) {
+      missingConditions += "\r\n-minimum 8 caractères";
+    }
+    if (missingConditions) {
+      missingConditions = `Il vous manque : ${missingConditions}   `;
+      setInfoPassword(missingConditions);
+      setInfoPasswordClass("red");
+    } else {
+      setInfoPassword("Votre mot de passe remplit toutes les conditions.");
+      setInfoPasswordClass("green");
+    }
+  };
+
   return (
     <main>
       <form onSubmit={handleSubmit}>
@@ -121,8 +153,9 @@ const Form = ({
           placeholder="password"
           value={password}
           onChange={(event) => handleChange(setPassword, event)}
+          onKeyUp={checkPassword}
         />
-
+        {<p className={"info-password " + infoPasswordClass}>{infoPassword}</p>}
         <label htmlFor="confirm-password">Confirm your password:</label>
         <input
           className={confirmPasswordClass}

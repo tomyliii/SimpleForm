@@ -15,6 +15,10 @@ function App() {
   const [emailClass, setEmailClass] = useState("");
   const [confirmPasswordClass, setConfirmPasswordClass] = useState("");
   const [messageError, setMessageError] = useState("");
+  const [infoPassword, setInfoPassword] = useState(
+    "Votre mot de passe doit contenir au mininum une minuscule, une majuscule, un caractère spécial, un nombre et doit etre composé d'au moins 8 caractères."
+  );
+  const [infoPasswordClass, setInfoPasswordClass] = useState("");
 
   const [formIsDisplay, setFormIsDisplay] = useState(true);
 
@@ -33,6 +37,10 @@ function App() {
           confirmPasswordClass={confirmPasswordClass}
           messageError={messageError}
           formIsDisplay={formIsDisplay}
+          infoPassword={infoPassword}
+          infoPasswordClass={infoPasswordClass}
+          setInfoPasswordClass={setInfoPasswordClass}
+          setInfoPassword={setInfoPassword}
           setFormIsDisplay={setFormIsDisplay}
           setName={setName}
           setEmail={setEmail}
