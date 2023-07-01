@@ -1,0 +1,25 @@
+div {
+  width: 300px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: sans-serif;
+  font-size: 1em;
+}
+div > p:last-of-type {
+  margin-bottom: 20px;
+}
+
+div > button {
+  width: 100%;
+  font-size: 1em;
+  padding: 15px 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+  background-color: #5c47d3;
+  color: white;
+  border: none;
+  font-family: sans-serif;
+  font-size: 1em;
+}
