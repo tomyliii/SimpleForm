@@ -3,6 +3,7 @@ Footer {
   justify-content: center;
   height: 100px;
   align-items: center;
+  text-align: center;
 }
 
 footer > p > span {
