@@ -1,0 +1,10 @@
+Footer {
+  display: flex;
+  justify-content: center;
+  height: 100px;
+  align-items: center;
+}
+
+footer > p > span {
+  font-weight: bold;
+}
