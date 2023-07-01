@@ -12,61 +12,43 @@ const Form = () => {
   const [messageError, setMessageError] = useState("");
 
   const [formIsDisplay, setFormIsDisplay] = useState(true);
+
   const regexMail = new RegExp("[a-zA-Z0-9]+@[a-zA-Z]+\\.[a-zA-Z]{2,3}");
   const regexpPasswordMaj = new RegExp("[A-Z]");
   const regexpPasswordMin = new RegExp("[a-z]");
   const regexpPasswordNoAlpha = new RegExp("\\W");
   const regexpPasswordNum = new RegExp("[0-9]");
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("OK");
-    console.log(name, email, password, confirmPassword);
+    setNameClass("");
+    setEmailClass("");
+    setPasswordClass("");
+    setConfirmPasswordClass("");
     if (name && email && password && confirmPassword) {
       if (password === confirmPassword) {
-        if (password.length >= 8) {
-          if (regexpPasswordMaj.test(password)) {
-            if (regexpPasswordMin.test(password)) {
-              if (regexpPasswordNoAlpha.test(password)) {
-                if (regexpPasswordNum.test(password)) {
-                  if (regexMail.test(email)) {
-                    setFormIsDisplay(false);
-                    setMessageError("");
-                    setPasswordClass("");
-                    setNameClass("");
-                    setEmailClass("");
-                    setConfirmPasswordClass("");
-                  } else {
-                    setMessageError(
-                      "Vous devez entrer une adresse mail valide."
-                    );
-                    setEmailClass("error");
-                  }
-                } else {
-                  setMessageError(
-                    "Vous devez entrer un mot de passe avec au moin un chiffre."
-                  );
-                  setPasswordClass("error");
-                }
-              } else {
-                setMessageError(
-                  "Vous devez entrer un mot de passe avec au moin un caractère special."
-                );
-                setPasswordClass("error");
-              }
-            } else {
-              setMessageError(
-                "Vous devez entrer un mot de passe avec au moin une minuscule"
-              );
-              setPasswordClass("error");
-            }
+        if (
+          password.length >= 8 &&
+          regexpPasswordMaj.test(password) &&
+          regexpPasswordMin.test(password) &&
+          regexpPasswordNoAlpha.test(password) &&
+          regexpPasswordNum.test(password)
+        ) {
+          if (regexMail.test(email)) {
+            setFormIsDisplay(false);
+            setMessageError("");
+            setPasswordClass("");
+            setNameClass("");
+            setEmailClass("");
+            setConfirmPasswordClass("");
           } else {
-            setMessageError(
-              "Vous devez entrer un mot de passe avec au moin une majuscule."
-            );
-            setPasswordClass("error");
+            setMessageError("Vous devez entrer une adresse mail valide.");
+            setEmailClass("error");
           }
         } else {
-          setMessageError("Le mot de passe est trop court.");
+          setMessageError(
+            "Le mot est incorect.Veuillez entrer un mot de passe avec au moin une majuscule, une minuscule, un chiffre et d'une longueur de minimum 8 charactères"
+          );
           setPasswordClass("error");
         }
       } else {
@@ -91,25 +73,12 @@ const Form = () => {
     }
   };
 
-  const handleNameChange = (event) => {
+  const handleChange = (set, event) => {
+    console.log(event);
     const value = event.target.value;
-    setName(value);
+    set(value);
   };
 
-  const handlePasswordChange = (event) => {
-    const value = event.target.value;
-    setPassword(value);
-  };
-
-  const handleConfirmPassword = (event) => {
-    const value = event.target.value;
-    setConfirmPassword(value);
-  };
-
-  const handleEmailChange = (event) => {
-    const value = event.target.value;
-    setEmail(value);
-  };
   return (
     <main>
       {formIsDisplay === true ? (
@@ -122,7 +91,7 @@ const Form = () => {
             name="name"
             placeholder="Firstname Lastname"
             value={name}
-            onChange={handleNameChange}
+            onChange={(event) => handleChange(setName, event)}
           />
 
           <label htmlFor="email">Email:</label>
@@ -133,7 +102,7 @@ const Form = () => {
             id="email"
             name="email"
             placeholder="FirstnameLastname@mail.com"
-            onChange={handleEmailChange}
+            onChange={(event) => handleChange(setEmail, event)}
           />
 
           <label htmlFor="password">password:</label>
@@ -144,7 +113,7 @@ const Form = () => {
             name="password"
             placeholder="password"
             value={password}
-            onChange={handlePasswordChange}
+            onChange={(event) => handleChange(setPassword, event)}
           />
 
           <label htmlFor="confirm-password">Confirm your password:</label>
@@ -154,7 +123,7 @@ const Form = () => {
             id="confirm-password"
             placeholder="password"
             value={confirmPassword}
-            onChange={handleConfirmPassword}
+            onChange={(event) => handleChange(setConfirmPassword, event)}
           />
           {/* {messageError && <p className="alert">{messageError}</p>} */}
           {<p className="alert">{messageError}</p>}
